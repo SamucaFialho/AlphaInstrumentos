@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-oficial</title>
+
+    <script src="../Editors/js.js" defer></script>
+    <link rel="shortcut icon" href="faviconsp.ico" type="image/x-icon">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #000;">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="images/logo.png" alt="logo" style="height:48px;margin-right:12px">
+        <span style="font-family:'Playfair Display', serif; font-size:20px; color:#C9A227">Alpha Instrumentos</span>
+      </a>
+      <div class="ms-auto">
+        <a href="login.html">Entrar</a>
+        <button class="btn btn-warning" id="cartBtn">Carrinho (<span id="cart-count">0</span>)</button>
+      </div>
+    </div>
+  </nav>
+
+    <main>
+        <div class="login-container" id="login-container">
+            <div class="form-container">
+                <form class="form form-login">
+                    <h2 class="form-title">Entrar Com</h2>
+                    <div class="form-social">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-apple"></i>
+                        </a>
+                    </div>
+                    <p class="form-text">ou utilize sua conta</p>
+                    <div class="form-input-container">
+                        <input type="email" class="form-input" placeholder="Email">
+                        <input type="password" class="form-input" placeholder="Password">
+                    </div>
+                    <a href="#" class="form-link">Esqueceu a senha?</a>
+                    <button type="button" class="form-button">Logar</button>
+                </form>
+                <form class="form form-register">
+                    <h2 class="form-title">Criar Conta</h2>
+                    <div class="form-social">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-apple"></i>
+                        </a>
+                    </div>
+                    <p class="form-text">ou cadastre seu email</p>
+                    <div class="form-input-container">
+                        <input type="text" class="form-input" placeholder="Nome">
+                        <input type="email" class="form-input" placeholder="Email">
+                        <input type="password" class="form-input" placeholder="Password">
+                    </div>
+                    <button type="button" class="form-button">Cadastrar</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <h2 class="form-title form-title-light">Já tem conta?</h2>
+                    <p class="form-text form-text-light">Para entrar na nossa loja faça login com suas informações</p>
+                    <button class="form-button form-button-light" id="open-login">Entrar</button>
+                </div>
+               <div class="overlay">
+                   <h2 class="form-title form-title-light">Olá Cliente</h2>
+                    <p class="form-text form-text-light">Cadastre-se e começe a fazer suas compras online</p>
+                    <button class="form-button form-button-light" id="open-register">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+  
+</body>
+</html>
