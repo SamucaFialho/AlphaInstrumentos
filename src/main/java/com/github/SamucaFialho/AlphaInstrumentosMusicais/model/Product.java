@@ -1,5 +1,7 @@
 package com.github.SamucaFialho.AlphaInstrumentosMusicais.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,21 +9,13 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Product {
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;
-    private double price;
-
-    public Product(String name, String description, double price, String imageUrl) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.imageUrl = imageUrl;
-    }
-
+    private BigDecimal price;
+    private String imageUrl;
 
     public Long getId() {
         return id;
@@ -47,11 +41,11 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -62,10 +56,4 @@ public class Product {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-    private String imageUrl;
-
-    public Product() {}
-
-    
 }

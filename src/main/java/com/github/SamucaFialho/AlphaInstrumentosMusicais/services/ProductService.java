@@ -2,18 +2,21 @@ package com.github.SamucaFialho.AlphaInstrumentosMusicais.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.SamucaFialho.AlphaInstrumentosMusicais.dto.ProductRequestCreate;
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.model.Product;
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.repository.ProductRepository;
 
 @Service
 public class ProductService {
 
-     private final ProductRepository repository;
+    @Autowired
+     private ProductRepository repository;
 
-    public ProductService(ProductRepository repository) {
-        this.repository = repository;
+    public Product createProduct(ProductRequestCreate dto) {
+        return repository.save(dto.toModel());
     }
 
     public List<Product> findAll() {
@@ -24,8 +27,12 @@ public class ProductService {
         return repository.save(product);
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public boolean delete(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
     

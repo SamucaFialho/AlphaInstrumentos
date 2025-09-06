@@ -21,15 +21,12 @@ function productCard(p) {
   const img = p.imageUrl || 'images/product-placeholder.jpg';
   return `
   <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-    <div class="card card-product h-100">
-      <img src="${img}" class="card-img-top" alt="${p.name}" style="height:180px; object-fit:cover;">
-      <div class="card-body d-flex flex-column">
+    <div class="card card-product h-100 text-center p-3">
+      <img src="${img}" class="card-img-top" alt="${p.name}">
+      <div class="card-body">
         <h5 class="card-title">${p.name}</h5>
-        <p class="card-text small text-muted">${p.category || ''}</p>
-        <p class="price mt-auto">R$ ${Number(p.price).toFixed(2)}</p>
-        <div class="mt-2 d-grid">
-          <button class="btn btn-buy btn-add" data-id="${p.id}">Adicionar ao carrinho</button>
-        </div>
+        <p class="price">R$ ${Number(p.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+        <button class="btn btn-buy w-100 btn-add" data-id="${p.id}">Adicionar ao carrinho</button>
       </div>
     </div>
   </div>`;
@@ -52,7 +49,22 @@ function saveCart(cart) {
   localStorage.setItem('alpha_cart', JSON.stringify(cart));
   document.getElementById('cart-count').innerText = cart.length;
 }
-function addToCart(productId) {
+async function addToCart(productId) {
+  // Buscar detalhes do produto
+  const res = await fetch(apiUrl);
+  const products = await res.json();
+  const product = products.find(p => String(p.id) === String(productId));
+  if (!product) {
+    alert('Produto não encontrado!');
+    return;
+  }
+  // Envia ao backend
+  await fetch('http://localhost:9000/api/cart/add', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(product)
+  });
+  // Salva no localStorage (mantém funcionalidade local)
   const cart = getCart();
   cart.push({productId, qty:1});
   saveCart(cart);
