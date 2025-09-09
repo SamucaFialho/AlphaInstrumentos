@@ -12,12 +12,66 @@ body {
 .price { 
     color: #C9A227; font-weight:700;
 }
+.mb-4{
+    text-align: center;
+    font-size: 40px;
+}
 .btn-buy {
-     background: #C9A227; color:#000; border: none; 
+    font-weight: 500;
+    border-radius: 10px; /* bordas arredondadas */
+    padding: 6px 18px;
+    border: 2px solid #C9A227; 
+    color: #000;
+    background-color: #C9A227;
+    transition: all 0.3s ease;
+    margin-right: 12px; /* espaço antes do carrinho */
+    font-family: 'Montserrat', sans-serif;
     }
 .btn-buy:hover {
-     opacity: 0.9; 
+    background-color: #C9A227;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.4); 
     }
+
+/* Botão Entrar */
+.btn-login {
+    font-weight: 500;
+    border-radius: 30px; /* bordas arredondadas */
+    padding: 6px 18px;
+    border: 2px solid #C9A227; 
+    color: #fff;
+    transition: all 0.3s ease;
+    margin-right: 12px; /* espaço antes do carrinho */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-login:hover {
+    background-color: #C9A227;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.4);
+}
+/**/
+
+.btn-warning {
+    font-weight: 500;
+    border-radius: 30px; /* bordas arredondadas */
+    padding: 6px 18px;
+    border: 2px solid #C9A227; 
+    color: #fff;
+    background-color: #000;
+    transition: all 0.3s ease;
+    margin-right: 12px; /* espaço antes do carrinho */
+    font-family: 'Montserrat', sans-serif;
+}
+.btn-warning:hover {
+    background-color: #C9A227;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.4); 
+    }
+
 .card-img-top {
     width: 100%;
     height: 320px;
