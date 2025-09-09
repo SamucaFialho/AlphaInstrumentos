@@ -1,0 +1,140 @@
+body { 
+    font-family: 'Montserrat', sans-serif; background: #000; color: #fff;
+ }
+ 
+.hero-img { 
+    height: 380px; object-fit: cover; filter: brightness(0.6);
+ }
+
+.card-product .card-title {
+     font-family: 'Playfair Display', serif; color: #fff;
+    }
+.price { 
+    color: #C9A227; font-weight:700;
+}
+.btn-buy {
+     background: #C9A227; color:#000; border: none; 
+    }
+.btn-buy:hover {
+     opacity: 0.9; 
+    }
+.card-img-top {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    background: #000;
+    margin-bottom: 0;
+}
+.card-body {
+    flex: unset;
+    padding: 16px;
+}
+.card-product {
+    background: #0b0b0b;
+    border: 1px solid rgba(201,162,39,0.12);
+    /* Adiciona cor de fundo escura para o card */
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap; /* permite quebrar para próxima linha */
+    justify-content: space-around; /* distribui melhor */
+    padding: 40px 60px;
+    border-top: 2px solid #cfa32d;
+}
+
+
+
+footer .col {
+    flex: 1 1 250px; /* mínimo de 250px, mas cresce se tiver espaço */
+    margin: 20px;
+    max-width: 350px; /* evita ficar muito largo */
+}
+
+footer .logo {
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 5px #cfa32d);
+}
+
+footer h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #cfa32d; /* títulos dourados */
+}
+
+footer p {
+    font-size: 14px;
+    margin: 5px 0;
+    line-height: 1.6;
+}
+
+footer p strong {
+    color: #cfa32d;
+}
+
+footer .follow {
+    margin-top: 15px;
+}
+
+footer .follow .icon i {
+    color: #fff;
+    margin-right: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+footer .follow .icon i:hover {
+    color: #cfa32d; /* hover dourado */
+}
+
+footer .install .row img {
+    margin-top: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+footer .install .row img:hover {
+    transform: scale(1.05);
+}
+
+
+footer .copyright {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid #444;
+    padding-top: 15px;
+    font-size: 13px;
+    color: #bbb;
+}
+
+.section-p1 {
+    margin-top: 80px; /* ajusta conforme necessário */
+}
+
+
+.icon {  
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    background-color: #F3F3FE;
+    box-shadow: 0 4px 4px #0004;
+    transition: .5s;
+}
+
+.icon:hover {
+    background-color: #cec3f7;
+    transform: translateY(-15%);
+}
+
+
