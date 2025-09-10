@@ -1,22 +1,78 @@
-const apiUrl = "http://localhost:9000/api/products"; // ajustar se backend em outra porta
+const apiUrl = "http://localhost:9000/api/products";
 
-async function fetchProducts() {
+// Função para pegar parâmetros da URL
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+async function fetchProduct(id) {
   try {
     const res = await fetch(apiUrl);
-    const data = await res.json();
-    renderProducts(data);
+    const products = await res.json();
+    const product = products.find(p => String(p.id) === String(id));
+    if (!product) {
+      document.getElementById('product-details').innerHTML = "<p>Produto não encontrado.</p>";
+      return;
+    }
+    renderProduct(product);
   } catch (err) {
-    console.error("Erro ao buscar produtos:", err);
-    document.getElementById('products').innerHTML = '';
+    console.error("Erro ao buscar produto:", err);
+    document.getElementById('product-details').innerHTML = "<p>Erro ao carregar produto.</p>";
   }
 }
 
-function renderProducts(products) {
-  const container = document.getElementById('products');
-  container.innerHTML = products.map(p => productCard(p)).join('');
-  attachBuyButtons();
+function renderProduct(p) {
+  const img = p.imageUrl || 'images/product-placeholder.jpg';
+  document.getElementById('product-details').innerHTML = `
+    <div class="col-md-6 text-center">
+      <img src="${img}" alt="${p.name}" class="img-fluid product-img">
+    </div>
+    <div class="col-md-6">
+      <h2 class="product-title">${p.name}</h2>
+      <p class="product-description">${p.description || 'Sem descrição disponível.'}</p>
+      <p class="product-price">R$ ${Number(p.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+      <button class="btn btn-warning btn-buy" onclick="addToCart(${p.id})">
+        Adicionar ao Carrinho
+      </button>
+    </div>
+  `;
 }
 
+// Funções carrinho
+function getCart() {
+  return JSON.parse(localStorage.getItem('alpha_cart') || '[]');
+}
+function saveCart(cart) {
+  localStorage.setItem('alpha_cart', JSON.stringify(cart));
+}
+async function addToCart(productId) {
+  const res = await fetch(apiUrl);
+  const products = await res.json();
+  const product = products.find(p => String(p.id) === String(productId));
+  if (!product) {
+    alert('Produto não encontrado!');
+    return;
+  }
+  await fetch('http://localhost:9000/api/cart/add', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(product)
+  });
+  const cart = getCart();
+  cart.push({ productId, qty: 1 });
+  saveCart(cart);
+  alert('Produto adicionado ao carrinho!');
+}
+
+// Inicializa
+document.addEventListener('DOMContentLoaded', () => {
+  const id = getQueryParam('id');
+  fetchProduct(id);
+});
+
+
+//carrinho adicionado
 function productCard(p) {
   const img = p.imageUrl || 'images/product-placeholder.jpg';
   return `
@@ -171,13 +227,3 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchProducts();
   saveCart(getCart()); // atualiza contagem
 });
-
-
-'use strict'
-
-const loginContainer = document.getElementById('login-container')
-
-const moveOverlay = () => loginContainer.classList.toggle('move')
-
-document.getElementById('open-register').addEventListener('click', moveOverlay)
-document.getElementById('open-login').addEventListener('click', moveOverlay)

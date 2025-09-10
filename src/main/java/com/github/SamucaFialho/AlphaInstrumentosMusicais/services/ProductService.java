@@ -1,6 +1,7 @@
 package com.github.SamucaFialho.AlphaInstrumentosMusicais.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class ProductService {
 
     public Product createProduct(ProductRequestCreate dto) {
         return repository.save(dto.toModel());
+    }
+
+    public Optional<Product> getById(Long id) {
+        return repository.findById(id);
     }
 
     public List<Product> findAll() {

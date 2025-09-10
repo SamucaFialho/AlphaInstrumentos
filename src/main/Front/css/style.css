@@ -82,6 +82,21 @@ body {
     background: #000;
     margin-bottom: 0;
 }
+
+.cart-price {
+  color: #C9A227;
+  font-weight: 600;
+}
+
+
+.cart-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(201,162,39,0.4);
+}
+
 .card-body {
     flex: unset;
     padding: 16px;
@@ -91,6 +106,28 @@ body {
     border: 1px solid rgba(201,162,39,0.12);
     /* Adiciona cor de fundo escura para o card */
 }
+
+/* Offcanvas personalizado */
+.offcanvas {
+    background-color: #0b0b0b !important; 
+    border-left: 2px solid #C9A227;
+}
+
+.offcanvas-header h5 {
+    font-family: 'Playfair Display', serif;
+    color: #C9A227;
+}
+
+.offcanvas-body {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+#cartItems .item {
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+    padding: 10px 0;
+}
+
 
 footer {
     background-color: #000;

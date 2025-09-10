@@ -3,35 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alpha Instrumentos Musicais</title>
-  <!-- Bootstrap 5 CDN -->
+  <title>Detalhes do Produto</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/main/Front/css/style.css">
 </head>
-<body class="bg-dark text-white">
+<body>
 
-
-
-
-
-
-
-  <!-- Top navbar -->
-
-
-  <!-- <section id="header" style="background: #000;">
-    <div class="container">
-      <a href="index.html"><img src="/src/assets/images/alphainstrumentosmusicais.png" class="logo" alt="logo"></a>
-    </div>
-    <div>
-      <ul id="navbar">
-        <li><a href=""></a></li>
-      </ul>
-    </div>
-  </section> -->
- 
   <nav class="navbar navbar-expand-lg navbar-dark" style="background: #000;">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="#">
@@ -48,45 +26,7 @@
     </div>
   </nav> 
 
-  <!-- Carousel -->
-  <div id="mainCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="/src/assets/images/TubaPetersburg.png" class="d-block w-100 hero-img" alt="Promo 1">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Instrumentos com qualidade</h5>
-          <p>Promoções para músicos iniciantes e profissionais.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="/src/assets/images/Imagem1quervender.png" class="d-block w-100 hero-img" alt="Promo 2">
-      </div>
-      <div class="carousel-item">
-        <img src="/src/assets/images/Fototubas.png" class="d-block w-100 hero-img" alt="Promo 3">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
-
-  <!-- Produtos -->
-  <main class="container mt-5">
-    <h2 class="mb-4" style="color:#C9A227; font-family:'Playfair Display', serif;">Produtos em destaque</h2>
-    <div id="products" class="row g-4"></div>
-    <a href="produto.html?id=${product.id}">
-</a>
-
-
-    <div id="products" class="row g-4">
-  <!-- Produto 1 -->
-  </main>
- 
-  
-  <!-- Offcanvas Carrinho -->
+    <!-- Offcanvas Carrinho -->
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="cartOffcanvas">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title">Seu Carrinho</h5>
@@ -103,6 +43,11 @@
   
 </div>
 
+  <main class="container my-5">
+    <div id="product-details" class="row align-items-center">
+      <!-- JS vai preencher -->
+    </div>
+  </main>
 
   <footer class="section-p1">
         <div class="col">
@@ -139,9 +84,7 @@
         </div>
     </footer>
 
-
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/src/main/Front/javascript/script.js"></script>
+  <script src="/src/main/Front/javascript/produto.js"></script>
 </body>
 </html>
