@@ -15,6 +15,7 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    private Integer quantidade = 0;
     private String imageUrl;
 
     public Long getId() {
@@ -49,11 +50,21 @@ public class Product {
         this.price = price;
     }
 
+    
+
     public String getImageUrl() {
         return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 }

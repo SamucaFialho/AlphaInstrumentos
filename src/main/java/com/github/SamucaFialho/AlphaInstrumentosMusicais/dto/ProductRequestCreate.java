@@ -7,10 +7,11 @@ import com.github.SamucaFialho.AlphaInstrumentosMusicais.model.Product;
 import jakarta.validation.constraints.NotBlank;
 
 public class ProductRequestCreate {
-    
+
     @NotBlank
     private String name;
 
+    private Integer quantidade;
     private BigDecimal price;
     private String imageUrl;
     private String description;
@@ -20,6 +21,7 @@ public class ProductRequestCreate {
         product.setName(this.name);
         product.setPrice(this.price);
         product.setDescription(this.description);
+        product.setQuantidade(this.quantidade);
         product.setImageUrl(this.imageUrl);
         return product;
     }
@@ -60,5 +62,13 @@ public class ProductRequestCreate {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
     
 }

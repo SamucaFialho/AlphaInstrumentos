@@ -2,23 +2,36 @@ const apiUrl = "http://localhost:9000/api/products"; // ajustar se backend em ou
 
 async function fetchProducts() {
   try {
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    renderProducts(data);
-  } catch (err) {
-    console.error("Erro ao buscar produtos:", err);
-    document.getElementById('products').innerHTML = '';
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    console.log("Produtos recebidos:", data); // debug
+    renderProducts(data); // chamando a função correta
+  } catch (error) {
+    console.error("Erro ao buscar produtos:", error);
   }
 }
 
 function renderProducts(products) {
   const container = document.getElementById('products');
+  if (!container) {
+    console.error("Elemento #products não encontrado no HTML");
+    return;
+  }
+
+  if (!products || products.length === 0) {
+    container.innerHTML = "<p class='text-center'>Nenhum produto disponível.</p>";
+    return;
+  }
+
   container.innerHTML = products.map(p => productCard(p)).join('');
   attachBuyButtons();
 }
 
 function productCard(p) {
   const img = p.imageUrl || 'images/product-placeholder.jpg';
+  const price = p.price ? Number(p.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : "0,00";
+  const estoque = p.quantidade ?? 0;
+
   return `
   <div class="col-12 col-sm-6 col-md-4 col-lg-3">
     <div class="card card-product h-100 text-center p-3">
@@ -27,14 +40,16 @@ function productCard(p) {
       </a>
       <div class="card-body">
         <h5 class="card-title">${p.name}</h5>
-        <p class="price">R$ ${Number(p.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-        <button class="btn btn-buy w-100 btn-add" data-id="${p.id}">Adicionar ao carrinho</button>
+        <p class="price">R$ ${price}</p>
+        <p class="stock">Disponível: ${estoque}</p>
+        <button class="btn btn-buy w-100 btn-add" data-id="${p.id}" ${estoque <= 0 ? "disabled" : ""}>
+          ${estoque > 0 ? "Adicionar ao carrinho" : "Esgotado"}
+        </button>
         <a href="produto.html?id=${p.id}" class="btn btn-outline-secondary w-100 mt-2">Ver detalhes</a>
       </div>
     </div>
   </div>`;
 }
-
 
 function attachBuyButtons() {
   document.querySelectorAll('.btn-add').forEach(btn => {
@@ -54,25 +69,38 @@ function saveCart(cart) {
   document.getElementById('cart-count').innerText = cart.length;
 }
 async function addToCart(productId) {
-  // Buscar detalhes do produto
-  const res = await fetch(apiUrl);
-  const products = await res.json();
-  const product = products.find(p => String(p.id) === String(productId));
-  if (!product) {
-    alert('Produto não encontrado!');
-    return;
+  try {
+    // Verifica produto no backend
+    const res = await fetch(`${apiUrl}/${productId}`);
+    const product = await res.json();
+
+    if (!product) {
+      alert("Produto não encontrado!");
+      return;
+    }
+
+    if (product.quantidade <= 0) {
+      alert("Produto esgotado!");
+      return;
+    }
+
+    // Se deu certo, adiciona no carrinho local
+    const cart = getCart();
+    cart.push({ productId, qty: 1 });
+    saveCart(cart);
+
+    // Envia ao backend
+    await fetch('http://localhost:9000/api/cart/add', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ productId, qty: 1 })
+    });
+
+    alert("Produto adicionado ao carrinho!");
+  } catch (err) {
+    console.error("Erro ao adicionar ao carrinho:", err);
+    alert("Erro ao adicionar produto ao carrinho!");
   }
-  // Envia ao backend
-  await fetch('http://localhost:9000/api/cart/add', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(product)
-  });
-  // Salva no localStorage (mantém funcionalidade local)
-  const cart = getCart();
-  cart.push({productId, qty:1});
-  saveCart(cart);
-  alert('Produto adicionado ao carrinho!');
 }
 
 /* Modal do carrinho (exibe IDs; para produzir corretamente, buscar produtos por id) */
@@ -94,7 +122,6 @@ function getGroupedCart() {
 // Função para remover produto do carrinho
 function removeFromCart(productId) {
   let cart = getCart();
-  // Remove todas as ocorrências do produto
   cart = cart.filter(item => String(item.productId) !== String(productId));
   saveCart(cart);
 }
@@ -141,7 +168,6 @@ function updateCartModal() {
           </div>
         `;
 
-        // Eventos para remover
         document.querySelectorAll('.btn-remove').forEach(btn => {
           btn.addEventListener('click', function() {
             const id = btn.dataset.id;
@@ -154,24 +180,39 @@ function updateCartModal() {
   }
 }
 
-
-
 document.getElementById('cartBtn').addEventListener('click', async () => {
   updateCartModal();
   new bootstrap.Modal(document.getElementById('cartModal')).show();
 });
 
-document.getElementById('checkoutBtn').addEventListener('click', () => {
-  // Exemplo: POST /api/orders -> implementar no backend
-  alert('Checkout simulado. Implementar endpoint /api/orders para finalizar a compra.');
+document.getElementById('checkoutBtn').addEventListener('click', async () => {
+  const cart = getGroupedCart();
+
+  const res = await fetch('http://localhost:9000/api/orders', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(cart)
+  });
+
+  if (res.ok) {
+    alert('Compra finalizada com sucesso!');
+    localStorage.removeItem('alpha_cart');
+    saveCart([]); 
+    updateCartModal();
+  } else {
+    const msg = await res.text();
+    alert('Erro no checkout: ' + msg);
+  }
 });
+
+
+
 
 /* inicializa */
 document.addEventListener('DOMContentLoaded', () => {
   fetchProducts();
-  saveCart(getCart()); // atualiza contagem
+  saveCart(getCart());
 });
-
 
 'use strict'
 

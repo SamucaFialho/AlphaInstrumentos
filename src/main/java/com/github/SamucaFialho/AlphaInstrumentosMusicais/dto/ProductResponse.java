@@ -8,11 +8,17 @@ public class ProductResponse {
     private Long id;
     private String name;
     private BigDecimal price;
+    private Integer quantidade;
+    private String description;
+    private String imageUrl;
 
     public ProductResponse toDto(Product product){
         this.setId(product.getId());
         this.setName(product.getName());
         this.setPrice(product.getPrice());
+        this.setQuantidade(product.getQuantidade());
+        this.setDescription(product.getDescription());
+        this.setImageUrl(product.getImageUrl());
         return this;
     }
 
@@ -34,5 +40,30 @@ public class ProductResponse {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
     
 }

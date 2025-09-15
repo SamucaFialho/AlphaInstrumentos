@@ -210,6 +210,89 @@ function updateCartModal() {
   }
 }
 
+/* -------------------------------
+   Vistos Recentemente
+--------------------------------*/
+
+// Salva produto visualizado no localStorage
+function saveRecentlyViewed(product) {
+  let viewed = JSON.parse(localStorage.getItem("recently_viewed") || "[]");
+
+  // remove duplicados
+  viewed = viewed.filter(p => p.id !== product.id);
+
+  // adiciona no início
+  viewed.unshift(product);
+
+  // mantém só os 4 últimos
+  if (viewed.length > 4) viewed = viewed.slice(0, 4);
+
+  localStorage.setItem("recently_viewed", JSON.stringify(viewed));
+}
+
+// Renderiza a seção
+function renderRecentlyViewed() {
+  const container = document.getElementById("recently-viewed");
+  if (!container) return;
+
+  const viewed = JSON.parse(localStorage.getItem("recently_viewed") || "[]");
+
+  if (viewed.length === 0) {
+    container.innerHTML = "<p>Nenhum produto visto recentemente.</p>";
+    return;
+  }
+
+  let html = `
+    <h3 class="mt-5 mb-3 pb-3 text-center">Vistos Recentemente</h3>
+    <div class="row">
+  `;
+
+  viewed.forEach(p => {
+    const img = p.imageUrl || "images/product-placeholder.jpg";
+    const price = p.price ? Number(p.price).toLocaleString("pt-BR", { minimumFractionDigits: 2 }) : "0,00";
+
+    html += `
+      <div class="col-6 col-md-3">
+        <div class="card card-product h-100 text-center p-2">
+          <a href="produto.html?id=${p.id}">
+            <img src="${img}" class="card-img-top" alt="${p.name}">
+          </a>
+          <div class="card-body">
+            <h6 class="card-title">${p.name}</h6>
+            <p class="price">R$ ${price}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  html += "</div>";
+  container.innerHTML = html;
+}
+
+/* ---------------------------------
+   Uso na página do produto
+---------------------------------- */
+// quando carregar a página do produto
+document.addEventListener("DOMContentLoaded", async () => {
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+
+  if (productId) {
+    try {
+      const res = await fetch(`${apiUrl}/${productId}`);
+      const product = await res.json();
+
+      if (product) {
+        saveRecentlyViewed(product);
+        renderRecentlyViewed();
+      }
+    } catch (err) {
+      console.error("Erro ao carregar produto:", err);
+    }
+  }
+});
+
 
 
 document.getElementById('cartBtn').addEventListener('click', async () => {
