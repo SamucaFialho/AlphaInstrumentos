@@ -24,20 +24,81 @@ async function fetchProduct(id) {
 
 function renderProduct(p) {
   const img = p.imageUrl || 'images/product-placeholder.jpg';
+  const stock = Number(p.stock) || 0;
   document.getElementById('product-details').innerHTML = `
-    <div class="col-md-6 text-center">
-      <img src="${img}" alt="${p.name}" class="img-fluid product-img">
-    </div>
-    <div class="col-md-6">
-      <h2 class="product-title">${p.name}</h2>
-      <p class="product-description">${p.description || 'Sem descrição disponível.'}</p>
-      <p class="product-price">R$ ${Number(p.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-      <button class="btn btn-warning btn-buy" onclick="addToCart(${p.id})">
-        Adicionar ao Carrinho
-      </button>
+    <div class="row g-4">
+      <!-- Coluna Esquerda (Imagens) -->
+      <div class="col-md-6 text-center">
+        <div class="product-gallery">
+          <img src="${img}" alt="${p.name}" class="img-fluid product-img main-img mb-3">
+          <div class="d-flex justify-content-center gap-2 flex-wrap">
+            <img src="${img}" class="thumb-img" alt="${p.name}">
+            <img src="${img}" class="thumb-img" alt="${p.name}">
+            <img src="${img}" class="thumb-img" alt="${p.name}">
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna Direita (Detalhes) -->
+      <div class="col-md-6">
+        <nav class="breadcrumb small mb-3">
+          <a href="index.html">Início</a> / 
+          <a href="#">Categoria</a> /
+          <span>${p.name}</span>
+        </nav>
+
+        <h2 class="product-title mb-3">${p.name}</h2>
+
+        <div class="product-price mb-2">
+          <span class="fs-4 fw-bold text-danger">
+            R$ ${Number(p.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+          </span>
+        </div>
+
+        <p class="pix">No Pix ou Transferência Bancária</p>
+        <p>Ou em até <strong>12x de R$ ${(p.price/12).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong> no cartão</p>
+
+        <p class="product-stock ${stock > 0 ? 'in-stock text-success' : 'out-of-stock text-danger'}">
+  ${stock > 0 ? `Em estoque (${stock} disponíveis)` : 'Esgotado'}
+</p>
+
+        <div class="frete-box mb-3">
+          <label for="cep" class="form-label">Simule seu frete</label>
+          <div class="d-flex gap-2">
+            <input type="text" id="cep" class="form-control" placeholder="Informe seu CEP">
+            <button class="btn btn-outline-secondary">Calcular</button>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column gap-2">
+          <button class="btn btn-warning btn-lg" onclick="addToCart(${p.id})">
+            Adicionar ao Carrinho
+          </button>
+          <button class="btn btn-success btn-lg">
+            Comprar pelo WhatsApp
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <h5>Benefícios e Garantias</h5>
+          <ul class="list-unstyled">
+            <li>✅ Pagamento em até 12x</li>
+            <li>✅ Envio em até 48h após confirmação</li>
+            <li>✅ Garantia de qualidade</li>
+          </ul>
+        </div>
+      </div>
     </div>
   `;
+
+  // Ativa troca de imagem ao clicar na miniatura
+  document.querySelectorAll('.thumb-img').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      document.querySelector('.main-img').src = thumb.src;
+    });
+  });
 }
+
 
 // Funções carrinho
 function getCart() {

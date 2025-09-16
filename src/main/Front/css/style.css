@@ -133,8 +133,42 @@ body {
     font-weight: 600;
 }
 
+.product-img {
+  max-height: 650px;
+  object-fit: contain;
+}
 
+.thumb-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
 
+.thumb-img:hover {
+  border-color: #ff9900;
+}
+
+.frete-box input {
+  max-width: 200px;
+}
+
+.btn-outline-secondary {
+    color: #fff;
+    border-color: #C9A227;
+    background-color: #000;
+}
+.btn-outline-secondary:hover {
+    background-color: #C9A227;
+    color: #000;
+    border-color: #C9A227;
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.4); 
+}
+.pix{
+    color: #fff;
+}
 
 footer {
     background-color: #000;
