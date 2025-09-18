@@ -1,6 +1,5 @@
 package com.github.SamucaFialho.AlphaInstrumentosMusicais.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.dto.ProductRequestCreate;
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.dto.ProductResponse;
-import com.github.SamucaFialho.AlphaInstrumentosMusicais.model.Product;
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.repository.ProductRepository;
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.services.ProductService;
 

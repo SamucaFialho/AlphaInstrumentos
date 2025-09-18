@@ -6,6 +6,110 @@ body {
   margin: 0;
 }
 
+
+/* --- Header / logo / ações --- */
+.navbar .brand-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #fff;
+  margin-left: 6px;
+}
+
+.header-actions .btn {
+  /* garante espaçamento e que fiquem alinhados à direita */
+  margin-left: 8px;
+}
+
+/* --- Barra de categorias --- */
+.menu-principal {
+  background: #000;
+  position: relative;     /* referencia para submenus */
+  z-index: 1200;          /* acima do carrossel */
+  border-top: 3px solid rgba(0,0,0,0.15);
+}
+
+.menu-principal .container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* distribui as categorias igualmente (cada item ocupa o mesmo espaço) */
+.menu-categorias {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+}
+
+.menu-categorias .menu-item {
+  flex: 1;                     /* ocupa espaço igual */
+  text-align: center;
+  padding: 12px 10px;
+  color: #fff;
+  font-weight: 700;
+  position: relative;          /* para posicionar o submenu relativo a este item */
+  cursor: pointer;
+  user-select: none;
+}
+
+/* hover visual (opcional) */
+.menu-categorias .menu-item:hover {
+  background: rgba(201, 163, 39, 0.415);
+  color: #fff;
+  
+  
+}
+
+/* --- Submenu --- */
+.submenu {
+  list-style: none;
+  display: none;               /* só mostra quando hover no item */
+  position: absolute;
+  top: 100%;                   /* logo abaixo da barra */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #cfa32d;         /* dourado */
+  padding: 6px 0;
+  margin: 6px 0 0 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 2000;               /* FORA do carousel */
+  border-radius: 3px;
+  min-width: 160px;
+  text-align: left;
+}
+
+/* submenu itens (sem link) */
+.submenu li {
+  padding: 8px 16px;
+  color: #000;
+  white-space: nowrap;
+}
+
+/* mostra submenu ao passar o mouse */
+.menu-item:hover .submenu {
+  display: block;
+}
+
+/* força o carrossel para trás caso tenha z-index alto */
+#mainCarousel {
+  position: relative;
+  z-index: 1;
+}
+
+/* responsivo: em telas pequenas empilha ou dá scroll */
+@media (max-width: 768px) {
+  .menu-categorias {
+    flex-wrap: wrap;
+  }
+  .menu-categorias .menu-item {
+    flex: 0 0 50%;
+    padding: 10px;
+  }
+  .submenu { left: 50%; transform: translateX(-50%); }
+  .header-actions { gap: 8px; }
+}
+
 /* Container principal */
 .login-container {
   position: relative;

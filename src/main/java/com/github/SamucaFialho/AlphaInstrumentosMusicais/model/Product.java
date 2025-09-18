@@ -1,11 +1,15 @@
 package com.github.SamucaFialho.AlphaInstrumentosMusicais.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Product {
@@ -17,6 +21,14 @@ public class Product {
     private BigDecimal price;
     private Integer quantidade = 0;
     private String imageUrl;
+
+    @ManyToMany
+    @JoinTable(
+        name = "product_category",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categorias;
 
     public Long getId() {
         return id;
@@ -67,4 +79,14 @@ public class Product {
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
+
+    public List<Category> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Category> categorias) {
+        this.categorias = categorias;
+    }
+
+    
 }

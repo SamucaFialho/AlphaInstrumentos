@@ -1,6 +1,7 @@
 package com.github.SamucaFialho.AlphaInstrumentosMusicais.dto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.model.Product;
 
@@ -15,6 +16,8 @@ public class ProductRequestCreate {
     private BigDecimal price;
     private String imageUrl;
     private String description;
+    private List<Long> categoriasIds;
+
 
     public Product toModel(){
         Product product = new Product();
@@ -69,6 +72,14 @@ public class ProductRequestCreate {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public List<Long> getCategoriasIds() {
+        return categoriasIds;
+    }
+
+    public void setCategoriasIds(List<Long> categoriasIds) {
+        this.categoriasIds = categoriasIds;
     }
     
 }

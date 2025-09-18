@@ -206,8 +206,6 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
 });
 
 
-
-
 /* inicializa */
 document.addEventListener('DOMContentLoaded', () => {
   fetchProducts();

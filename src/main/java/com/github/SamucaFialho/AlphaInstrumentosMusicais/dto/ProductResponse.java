@@ -1,6 +1,7 @@
 package com.github.SamucaFialho.AlphaInstrumentosMusicais.dto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.github.SamucaFialho.AlphaInstrumentosMusicais.model.Product;
 
@@ -11,6 +12,7 @@ public class ProductResponse {
     private Integer quantidade;
     private String description;
     private String imageUrl;
+    private List<CategoryResponse> categoriasIds;
 
     public ProductResponse toDto(Product product){
         this.setId(product.getId());
@@ -19,6 +21,13 @@ public class ProductResponse {
         this.setQuantidade(product.getQuantidade());
         this.setDescription(product.getDescription());
         this.setImageUrl(product.getImageUrl());
+
+this.setCategoriasIds(
+        product.getCategorias().stream()
+            .map(cat -> new CategoryResponse().toDto(cat))
+            .toList()
+    );
+
         return this;
     }
 
@@ -63,6 +72,14 @@ public class ProductResponse {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<CategoryResponse> getCategoriasIds() {
+        return categoriasIds;
+    }
+
+    public void setCategoriasIds(List<CategoryResponse> categoriasIds) {
+        this.categoriasIds = categoriasIds;
     }
     
     

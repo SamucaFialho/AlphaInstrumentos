@@ -12,41 +12,70 @@
 </head>
 <body class="bg-dark text-white">
 
-
-
-
-
-
-
-  <!-- Top navbar -->
-
-
-  <!-- <section id="header" style="background: #000;">
-    <div class="container">
-      <a href="index.html"><img src="/src/assets/images/alphainstrumentosmusicais.png" class="logo" alt="logo"></a>
-    </div>
-    <div>
-      <ul id="navbar">
-        <li><a href=""></a></li>
-      </ul>
-    </div>
-  </section> -->
  
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background: #000;">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <a href="index.html"><img src="/src/assets/images/alphainstrumentosmusicais.png" alt="logo" style="height:48px;margin-right:12px"></a>
-        <span style="font-family:'Playfair Display', serif; font-size:20px; color:#fff">Alpha Instrumentos</span>
-      </a>
-      <div class="ms-auto">
-        <a href="login.html" class="btn btn-outline-warning btn-login">Entrar</a>
-        <button class="btn btn-warning" id="cartBtn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
-        Carrinho (<span id="cart-count">0</span>)
-        </button>
+ <!-- ===== HEADER ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: #000;">
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- logo + nome (ALINHADO À ESQUERDA) -->
+    <a class="navbar-brand d-flex align-items-center" href="index.html" style="text-decoration:none;">
+      <img class="logo" src="/src/assets/images/alphainstrumentosmusicais.png" alt="logo" style="height:48px;margin-right:12px">
+      <span class="brand-text">Alpha Instrumentos</span>
+    </a>
 
-      </div>
+    <!-- botões (ALINHADOS À DIREITA) -->
+    <div class="d-flex align-items-center header-actions">
+      <a href="login.html" class="btn btn-outline-warning btn-login me-2">Entrar</a>
+      <button class="btn btn-warning" id="cartBtn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+        Carrinho (<span id="cart-count">0</span>)
+      </button>
     </div>
-  </nav> 
+  </div>
+</nav>
+
+  <!-- ===== BARRA DE CATEGORIAS (fica abaixo do navbar) ===== -->
+<nav class="menu-principal">
+  <div class="container">
+    <ul class="menu-categorias">
+      <li class="menu-item">Acessórios
+        <ul class="submenu">
+          <li>Palhetas</li>
+          <li>Boquilhas</li>
+          <li>Estojos</li>
+          <li>Bocais</li>
+          <li>Outros Produtos</li>
+        </ul>
+      </li>
+      <li class="menu-item">Trompetes
+        <ul class="submenu">
+          <li>Trompete Sib</li>
+          <li>Trompete Dó</li>
+        </ul>
+      </li>
+      <li class="menu-item">Saxofones
+        <ul class="submenu">
+          <li>Sax Alto</li>
+          <li>Sax Tenor</li>
+        </ul>
+      </li>
+      <li class="menu-item">Trombones
+        <ul class="submenu">
+          <li>Todos os Trombones</li>
+          <li>Trombone de Vara</li>
+          <li>Trombonito</li>
+        </ul>
+      </li>
+      <li class="menu-item">Tubas
+        <ul class="submenu">
+          <li>Todas as tubas</li>
+          <li>Tuba Sib</li>
+          <li>Tuba Mib</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
 
   <!-- Carousel -->
   <div id="mainCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
